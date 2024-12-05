@@ -11,6 +11,7 @@ class SingleBook extends Component {
     return (
       <>
         <Card
+          data-testid="single-book"
           // onClick={() => this.setState({ selected: !this.state.selected })}
           onClick={() => this.props.changeSelectedBook(this.props.book.asin)}
           style={{

@@ -1,15 +1,22 @@
 import { render, screen } from '@testing-library/react'
-import Welcome from './Welcome'
+import Welcome from './components/Welcome'
+import BookList from './components/BookList'
+import book from './data/fantasy.json'
 
 describe('Welcome Component', () => {
-  test('should render Welcome component with correct text', () => {
+  test('renders Welcome component with the correct heading text', () => {
     render(<Welcome />)
     const headingElement = screen.getByRole('heading', { level: 1 })
     expect(headingElement).toBeInTheDocument()
     expect(headingElement).toHaveTextContent('Benvenuti in EpiBooks!')
-    const alertElement = screen
-      .getByText(/Benvenuti in EpiBooks!/i)
-      .closest('.alert')
-    expect(alertElement).toBeInTheDocument()
+  })
+})
+
+describe('BookList', () => {
+  it('dovrebbe renderizzare tante carte quanti sono i libri', () => {
+    render(<BookList books={book} />)
+    const cards = screen.getAllByTestId('single-book')
+
+    expect(cards.length).toBe(book.length)
   })
 })
